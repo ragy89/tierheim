@@ -1,5 +1,9 @@
 package ch.sinelsoft.tierheim.commands;
 
+import java.util.Scanner;
+
+import ch.sinelsoft.tierheim.data.PetHotel;
+
 /**
  * Interface for actual command implementations
  */
@@ -11,6 +15,6 @@ public interface ICommand {
 	 * @param params array of parameters in string format as received from the console
 	 * @return true upon success, otherwise false
 	 */
-	public boolean handle(String[] params);
+	public boolean handle(Scanner scanner, PetHotel petHotel, String[] params);
 	
 }

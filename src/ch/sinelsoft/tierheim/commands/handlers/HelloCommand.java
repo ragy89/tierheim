@@ -1,6 +1,9 @@
 package ch.sinelsoft.tierheim.commands.handlers;
 
+import java.util.Scanner;
+
 import ch.sinelsoft.tierheim.commands.ICommand;
+import ch.sinelsoft.tierheim.data.PetHotel;
 
 /**
  * Simple command to say hello
@@ -8,7 +11,7 @@ import ch.sinelsoft.tierheim.commands.ICommand;
 public class HelloCommand implements ICommand {
 
 	@Override
-	public boolean handle(String[] params) {
+	public boolean handle(Scanner scanner, PetHotel petHotel, String[] params) {
 		System.out.println("Servus und hallo!");
 		return true;
 	}

@@ -2,12 +2,25 @@ package ch.sinelsoft.tierheim.commands;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Scanner;
+
+import ch.sinelsoft.tierheim.data.PetHotel;
 
 /**
  * Class which is responsible for command handling
  */
 public class CommandManager {
 
+	/**
+	 * The scanner instance to use for input
+	 */
+	private Scanner scanner;
+	
+	/**
+	 * The instance of the pet hotel
+	 */
+	private PetHotel petHotel;
+	
 	/**
 	 * The map between commands and handler classes
 	 */
@@ -18,7 +31,9 @@ public class CommandManager {
 	 * 
 	 * @param commandHandlerMap a map between commands and handler class names
 	 */
-	public CommandManager(Map<String, Class<?>> commandHandlerMap) {
+	public CommandManager(Scanner scanner, PetHotel petHotel, Map<String, Class<?>> commandHandlerMap) {
+		this.scanner = scanner;
+		this.petHotel = petHotel;
 		this.commandHandlerMap = commandHandlerMap;
 	}
 	
@@ -58,19 +73,22 @@ public class CommandManager {
 		}
 		
 		//try to create instance of class via reflection and execute it
+		Class<?> classDef = this.commandHandlerMap.get(command);
+		Object obj = null;
 		try {
-			Class<?> classDef = this.commandHandlerMap.get(command);
-			Object obj = classDef.newInstance();
-			
-			if (obj instanceof ICommand) {
-				ICommand commandInstance = (ICommand) obj;
-				return commandInstance.handle(params);
-			} else {
-				System.out.println(String.format("\"%s\" does not implement ICommand!", classDef.getName()));
-				return false;
-			}
-		} catch (Exception e) {
-			System.out.println(String.format("Could not find, instantiate or access the class for the command \"%s\"!", command));
+			obj = classDef.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			System.out.println(String.format("Problem while creating instance of class \"%s\"", classDef.getName()));
+			return false;
+		}
+		
+		if (obj instanceof ICommand) {
+			ICommand commandInstance = (ICommand) obj;
+			boolean wasSuccessful = commandInstance.handle(this.scanner, this.petHotel, params);
+			System.out.println(String.format("> %s\n", wasSuccessful ? "command was executed successful!" : "command failed!"));
+			return wasSuccessful;
+		} else {
+			System.out.println(String.format("\"%s\" does not implement ICommand!", classDef.getName()));
 			return false;
 		}
 	}

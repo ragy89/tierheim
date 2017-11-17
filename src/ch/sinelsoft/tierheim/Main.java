@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import ch.sinelsoft.tierheim.commands.CommandManager;
+import ch.sinelsoft.tierheim.commands.handlers.*;
 
 /**
  * The main class of the application
@@ -18,8 +19,9 @@ public class Main {
 		System.out.println("Hallo aus dem Tierheim!");
 		
 		//prepare the command manager
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 		CommandManager cmdMgr = new CommandManager(map);
+		map.put("hallo", HelloCommand.class);
 		
 		//create a new scanner and listen for input
 		Scanner s = new Scanner(System.in);

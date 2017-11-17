@@ -11,14 +11,14 @@ public class CommandManager {
 	/**
 	 * The map between commands and handler classes
 	 */
-	private Map<String, String> commandHandlerMap;
+	private Map<String, Class<?>> commandHandlerMap;
 	
 	/**
 	 * Constructor initializing the handler map
 	 * 
 	 * @param commandHandlerMap a map between commands and handler class names
 	 */
-	public CommandManager(Map<String, String> commandHandlerMap) {
+	public CommandManager(Map<String, Class<?>> commandHandlerMap) {
 		this.commandHandlerMap = commandHandlerMap;
 	}
 	
@@ -58,20 +58,19 @@ public class CommandManager {
 		}
 		
 		//try to create instance of class via reflection and execute it
-		String className = this.commandHandlerMap.get(command);
 		try {
-			Class<?> definition = Class.forName(className);
-			Object obj = definition.newInstance();
+			Class<?> classDef = this.commandHandlerMap.get(command);
+			Object obj = classDef.newInstance();
 			
 			if (obj instanceof ICommand) {
 				ICommand commandInstance = (ICommand) obj;
 				return commandInstance.handle(params);
 			} else {
-				System.out.println(String.format("\"%s\" does not implement ICommand!", className));
+				System.out.println(String.format("\"%s\" does not implement ICommand!", classDef.getName()));
 				return false;
 			}
 		} catch (Exception e) {
-			System.out.println(String.format("Could not find, instantiate or access class \"%s\"!", className));
+			System.out.println(String.format("Could not find, instantiate or access the class for the command \"%s\"!", command));
 			return false;
 		}
 	}

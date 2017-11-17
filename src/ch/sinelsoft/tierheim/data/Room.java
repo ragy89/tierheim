@@ -13,6 +13,8 @@ public class Room {
 	}
 	
 	public Room(String roomId, int capacity) {
+		this.roomId = roomId;
+		this.capacity = capacity;
 	}
 	
 	public String getRoomId() {

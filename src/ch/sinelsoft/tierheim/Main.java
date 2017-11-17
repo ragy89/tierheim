@@ -21,7 +21,10 @@ public class Main {
 		//prepare the command manager
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
 		CommandManager cmdMgr = new CommandManager(map);
+		
+		//add supported commands to map
 		map.put("hallo", HelloCommand.class);
+		map.put("sinel", SinelCommand.class);
 		
 		//create a new scanner and listen for input
 		Scanner s = new Scanner(System.in);

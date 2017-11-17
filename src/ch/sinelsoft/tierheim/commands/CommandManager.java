@@ -37,7 +37,7 @@ public class CommandManager {
 		//the parameters are the rest of the parts
 		String[] params = new String[0];
 		if (parts.length > 1) {
-			parts = Arrays.copyOfRange(parts, 1, parts.length);
+			params = Arrays.copyOfRange(parts, 1, parts.length);
 		}
 		
 		this.executeCommand(command, params);

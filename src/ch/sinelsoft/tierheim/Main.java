@@ -20,7 +20,7 @@ public class Main {
 		System.out.println("Hallo aus dem Tierheim!\n");
 		Scanner s = new Scanner(System.in);
 		
-		//create the tierheim instance
+		//create the pet hotel instance
 		PetHotel th = new PetHotel();
 		
 		//prepare the command manager

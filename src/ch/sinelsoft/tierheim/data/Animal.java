@@ -1,5 +1,14 @@
 package ch.sinelsoft.tierheim.data;
 
+/**
+ * This class is the generic implementation of an animal.
+ * 
+ * TODO ragy: override method of comparison between animals to identify them by
+ * a combination of name, age and species.
+ * 
+ * TODO ragy: make this class abstract and implement actual animal-classes
+ * extending this one
+ */
 public class Animal {
 	
 	private String name;

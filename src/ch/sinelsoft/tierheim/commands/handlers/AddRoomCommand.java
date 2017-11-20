@@ -32,4 +32,9 @@ public class AddRoomCommand implements ICommand {
 		return true;
 	}
 
+	@Override
+	public String commandHelp() {
+		return "addroom roomId capacity";
+	}
+
 }

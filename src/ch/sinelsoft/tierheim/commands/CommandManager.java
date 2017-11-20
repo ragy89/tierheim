@@ -68,6 +68,7 @@ public class CommandManager {
 	protected boolean executeCommand(String command, String[] params) {
 		//check if handler is registered
 		if (!this.commandHandlerMap.containsKey(command)) {
+			//TODO ragy: show help of commands here!
 			System.out.println(String.format("No handler for command \"%s\" found!", command));
 			return false;
 		}
@@ -84,8 +85,9 @@ public class CommandManager {
 		
 		if (obj instanceof ICommand) {
 			ICommand commandInstance = (ICommand) obj;
+			//TODO ragy: call method to validate params here and if false, show help!
 			boolean wasSuccessful = commandInstance.handle(this.scanner, this.petHotel, params);
-			System.out.println(String.format("> %s\n", wasSuccessful ? "command was executed successful!" : "command failed!"));
+			System.out.println(String.format(">%s", wasSuccessful ? "success!" : "fail!"));
 			return wasSuccessful;
 		} else {
 			System.out.println(String.format("\"%s\" does not implement ICommand!", classDef.getName()));

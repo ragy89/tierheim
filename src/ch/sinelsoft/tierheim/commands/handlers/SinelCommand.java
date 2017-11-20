@@ -13,4 +13,9 @@ public class SinelCommand implements ICommand {
 		return true;
 	}
 
+	@Override
+	public String commandHelp() {
+		return "sinel"; 
+	}
+
 }

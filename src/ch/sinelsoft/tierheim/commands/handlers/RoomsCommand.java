@@ -24,4 +24,9 @@ public class RoomsCommand implements ICommand {
 		return true;
 	}
 
+	@Override
+	public String commandHelp() {
+		return "help";
+	}
+
 }

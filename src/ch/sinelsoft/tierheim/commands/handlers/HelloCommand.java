@@ -16,4 +16,9 @@ public class HelloCommand implements ICommand {
 		return true;
 	}
 
+	@Override
+	public String commandHelp() {
+		return "hello";
+	}
+
 }

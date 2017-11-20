@@ -2,6 +2,12 @@ package ch.sinelsoft.tierheim.data;
 
 import java.util.ArrayList;
 
+/**
+ * The main implementation of the pet hotel.
+ * 
+ * TODO ragy: add methods to work with animals (add, remove, etc)
+ *
+ */
 public class PetHotel {
 
 	private ArrayList<Room> rooms;
